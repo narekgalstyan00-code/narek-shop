@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Narek.SHOP — Online Shop</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    header {
+      background: white;
+      border-bottom: 3px solid #e60012;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
+      background: #e60012;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 900;
+    }
+
+    .brand h1 {
+      color: #e60012;
+      font-size: 25px;
+    }
+
+    .brand span {
+      color: #777;
+      font-size: 12px;
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    button,
+    .call-button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 15px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .call-button {
+      background: #e60012;
+      color: white;
+    }
+
+    .cart-button {
+      background: #111;
+      color: white;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 25px 15px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, white, #ffe5e7);
+      border-radius: 22px;
+      padding: 30px;
+      margin-bottom: 25px;
+    }
+
+    .hero h2 {
+      color: #d00010;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #666;
+      font-size: 16px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 18px;
+      padding: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .product-image {
+      height: 200px;
+      border-radius: 15px;
+      background: #eeeeee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 85px;
+    }
+
+    .product h3 {
+      margin-top: 13px;
+      margin-bottom: 6px;
+    }
+
+    .price {
+      color: #e60012;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .add-button {
+      width: 100%;
+      background: #e60012;
+      color: white;
+    }
+
+    .cart {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .cart h2 {
+      margin-bottom: 15px;
+    }
+
+    .cart-empty {
+      color: #777;
+      padding: 10px 0;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      padding: 12px 0;
+    }
+
+    .remove-button {
+      background: #eee;
+      padding: 7px 10px;
+      border-radius: 8px;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 21px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .order-button {
+      width: 100%;
+      background: #111;
+      color: white;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    footer {
+      margin-top: 35px;
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+
+    footer strong {
+      color: #ff1b2d;
+    }
+
+    @media(max-width:600px) {
+      header {
+        padding: 10px;
+      }
+
+      .brand h1 {
+        font-size: 20px;
+      }
+
+      .logo {
+        width: 44px;
+        height: 44px;
+        font-size: 27px;
+      }
+
+      .header-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <div class="logo">N</div>
+
+    <div>
+      <h1>Narek.SHOP</h1>
+      <span>ONLINE CLOTHING SHOP</span>
+    </div>
+  </div>
+
+  <div class="header-buttons">
+    <a class="call-button" href="tel:+37498343839">
+      📞 Զանգահարել
+    </a>
+
+    <button class="cart-button" onclick="goToCart()">
+      🛒 Զամբյուղ (<span id="cartCount">0</span>)
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h2>Բարի գալուստ Narek.SHOP 👕</h2>
+    <p>Ընտրիր քո ուզած հագուստը և ավելացրու զամբյուղ։</p>
+  </section>
+
+  <section class="products">
+
+    <div class="product">
+      <div class="product-image">👕</div>
+      <h3>Սև T-Shirt</h3>
+      <div class="price">7,500 ֏</div>
+      <button class="add-button"
+        onclick="addToCart('Սև T-Shirt', 7500)">
+        Ավելացնել զամբյուղ 🛒
+     tton>
+    </div>
+
+    <div class="product">
+      <div class="product-image">👖</div>
+      <h3>Ջինս</h3>
+      <div class="price">15,000 ֏</div>
+      <button class="add-button"
+        onclick="addToCart('Ջինս', 15000)">
+        Ավելացնել զամբյուղ 🛒
+      </button>
+    </div>
+
+    <div class="product">
+      <div class="product-image">🧥</div>
+      <h3>Սև բաճկոն</h3>
+      <div class="price">22,000 ֏</div>
+      <button class="add-button"
+        onclick="addToCart('Սև բաճկոն', 22000)">
+        Ավելացնել զամբյուղ 🛒
+      </button>
+    </div>
+
+    <div class="product">
+      <div class="product-image">👟</div>
+      <h3>Սպորտային կոշիկներ</h3>
+      <div class="price">25,000 ֏</div>
+      <button class="add-button"
+        onclick="addToCart('Սպորտային կոշիկներ', 25000)">
+        Ավելացնել զամբյուղ 🛒
+      </button>
+    </div>
+
+    <div class="product">
+      <div class="product-image">👚</div>
+      <h3>Հուդի</h3>
+      <div class="price">18,500 ֏</div>
+      <button class="add-button"
+        onclick="addToCart('Հուդի', 18500)">
+        Ավելացնել զամբյուղ 🛒
+      </button>
+    </div>
+
+    <div class="product">
+      <div class="product-image">🧢</div>
+      <h3>Կեպկա</h3>
+      <div class="price">6,000 ֏</div>
+      <button class="add-button"
+        onclick="addToCart('Կեպկա', 6000)">
+        Ավելացնել զամբյուղ 🛒
+      </button>
+    </div>
+
+  </section>
+
+  <section class="cart" id="cart">
+
+    <h2>🛒 Զամբյուղ</h2>
+
+    <div id="cartItems" class="cart-empty">
+      Զամբյուղը դատարկ է։
+    </div>
+
+    <div class="total">
+      Ընդամենը՝
+      <span id="totalPrice">0</span> ֏
+    </div>
+
+    <a class="order-button" href="tel:+37498343839">
+      📞 Պատվիրել զանգով
+    </a>
+
+  </section>
+
+</main>
+
+<footer>
+  <strong>Narek.SHOP</strong>
+  <br><br>
+  📞 +374 98 343839
+  <br><br>
+  © 2026 Narek.SHOP
+</footer>
+
+<script>
+
+  let cart = [];
+
+  function addToCart(name, price) {
+
+    cart.push({
+      name: name,
+      price: price
+    });
+
+    updateCart();
+
+    document.getElementById("cart").scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+  function removeFromCart(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+    }
+
+  function updateCart() {
+
+    const items = document.getElementById("cartItems");
+    const count = document.getElementById("cartCount");
+    const total = document.getElementById("totalPrice");
+
+    count.innerText = cart.length;
+
+    if (cart.length === 0) {
+
+      items.className = "cart-empty";
+      items.innerHTML = "Զամբյուղը դատարկ է.";
+      total.innerText = "0";
+
+      return;
+    }
+
+    items.className = "";
+
+    let html = "";
+    let sum = 0;
+
+    cart.forEach(function(item, index) {
+
+      sum += item.price;
+
+      html += `
+        <div class="cart-item">
+
+          <span>${item.name}</span>
+
+          <span>
+            ${item.price.toLocaleString()} ֏
+
+            <button
+              class="remove-button"
+              onclick="removeFromCart(${index})">
+              ✕
+            </button>
+
+          </span>
+
+        </div>
+      `;
+    });
+
+    items.innerHTML = html;
+
+    total.innerText = sum.toLocaleString();
+  }
+
+  function goToCart() {
+
+    document.getElementById("cart").scrollIntoView({
+      behavior: "smooth"
+    })}
